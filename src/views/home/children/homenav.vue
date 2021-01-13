@@ -1,7 +1,7 @@
 <template>
-  <div id="homevue">
+  <div class="homeNav">
     <navbar>
-      <p slot="center">首页</p>
+      <p slot="center" class="title">首页</p>
     </navbar>
   </div>
 </template>
@@ -9,7 +9,7 @@
 <script>
 import navbar from "components/common/navbar/navbar.vue";
 export default {
-  name: "homevue",
+  name: "HomeNav",
   components: {
     navbar,
   },
@@ -17,4 +17,10 @@ export default {
 </script>
 
 <style scoped>
+.homeNav {
+  height: 44px;
+}
+.title {
+  color: aliceblue;
+}
 </style>

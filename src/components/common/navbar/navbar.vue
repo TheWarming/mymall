@@ -20,6 +20,11 @@ export default {
   text-align: center;
   background-color: var(--color-tint);
   font-size: 18px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9;
 }
 .navbar .left,
 .navbar .right {

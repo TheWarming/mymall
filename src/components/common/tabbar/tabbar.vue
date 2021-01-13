@@ -13,7 +13,7 @@ export default {
 <style scoped>
 #tabbar {
   height: 49px;
-  background-color: #cccccc;
+  background-color: #eee;
   position: fixed;
   bottom: 0;
   left: 0;

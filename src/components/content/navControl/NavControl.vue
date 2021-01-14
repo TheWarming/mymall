@@ -41,6 +41,7 @@ export default {
   display: flex;
   text-align: center;
   height: 35px;
+  background-color: white;
 }
 .navControl div {
   flex: 1;

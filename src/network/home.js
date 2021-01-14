@@ -1,4 +1,4 @@
-import axios from "network/axios";
+import axios from "./myAxios";
 
 export function getHomeMultidata() {
   return axios({

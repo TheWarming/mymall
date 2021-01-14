@@ -1,17 +1,32 @@
 <template>
   <div id="home">
     <home-nav></home-nav>
+    <nav-control
+      :list="NCList"
+      @navConClick="changNavCon"
+      v-show="isShowNavCon1"
+      class="nCFixed"
+      ref="navCon2"
+    ></nav-control>
     <my-scroll
       ref="myScroll"
       :probeType="3"
       :isPullUpLoad="true"
       @scroll="scroll"
       @pullingUp="pullingUp"
+      class="wrapper"
     >
-      <home-swiper :bannerList="banner"></home-swiper>
+      <home-swiper
+        :bannerList="banner"
+        @swiperImgLoad="swiperImgLoad"
+      ></home-swiper>
       <home-recommend :recommendList="recommend" />
       <home-feature></home-feature>
-      <nav-control :list="NCList" @navConClick="changNavCon"></nav-control>
+      <nav-control
+        :list="NCList"
+        @navConClick="changNavCon"
+        ref="navCon1"
+      ></nav-control>
       <home-goods :list="goodsList[currentType].list"></home-goods>
     </my-scroll>
     <back-top @click.native="toTop" v-show="toTopIsShow"></back-top>
@@ -30,6 +45,9 @@ import NavControl from "components/content/navControl/NavControl";
 import MyScroll from "components/common/myScroll/MyScroll";
 import BackTop from "components/common/backTop/BackTop";
 
+//引入防抖
+import { debounce } from "common/utils";
+
 export default {
   name: "home",
   created() {
@@ -38,6 +56,18 @@ export default {
     this.getHomeDataV("pop");
     this.getHomeDataV("sell");
     this.getHomeDataV("new");
+  },
+  mounted() {
+    //响应goods的图片加载
+    const refresh = debounce(this.$refs.myScroll.refresh);
+    this.$bus.$on("goodsImgLoad", refresh);
+  },
+  activated() {
+    this.$refs.myScroll.toTop(0, this.scrollY, 0);
+    this.$refs.myScroll.refresh();
+  },
+  deactivated() {
+    this.scrollY = this.$refs.myScroll.getScrollY();
   },
   components: {
     HomeNav,
@@ -55,7 +85,15 @@ export default {
       banner: [],
       recommend: [],
       toTopIsShow: false,
+      isShowNavCon1: false,
       NCList: ["流行", "热销", "新款"],
+      NCScrollY: new Map([
+        ["pop", 0],
+        ["sell", 0],
+        ["new", 0],
+      ]),
+      scrollY: 0,
+      navConY: 0,
       goodsList: {
         pop: {
           page: 0,
@@ -86,11 +124,19 @@ export default {
         /* console.log(res); */
         this.goodsList[type].list.push(...res.data.list);
         this.goodsList[type].page++;
+        this.$refs.myScroll.refresh();
         callback && callback();
       });
     },
     /**事件响应 */
     changNavCon(index) {
+      const y = this.$refs.myScroll.getScrollY();
+      let time = 0;
+      if (y < -this.navConY) {
+        this.NCScrollY.set(this.currentType, y);
+      } else {
+        time = 200;
+      }
       switch (index) {
         case 0:
           this.currentType = "pop";
@@ -102,20 +148,33 @@ export default {
           this.currentType = "new";
           break;
       }
-      this.$refs.myScroll.refresh;
+      this.$refs.myScroll.toTop(0, this.NCScrollY.get(this.currentType), time);
+      this.$refs.myScroll.refresh();
+
+      //同步nc1与nc2的显示
+      this.$refs.navCon1.currentIndex = index;
+      this.$refs.navCon2.currentIndex = index;
     },
     toTop() {
       this.$refs.myScroll.toTop();
     },
     scroll(pos) {
+      /* console.log(pos.y, this.navConY, this.isShowNavCon1); */
+      this.isShowNavCon1 = -pos.y > this.navConY;
       this.toTopIsShow = -pos.y > 1000;
     },
     pullingUp() {
-      this.getHomeDataV(this.currentType, this.refresh);
+      this.getHomeDataV(this.currentType, this.$refs.myScroll.finishPullUp());
     },
-    refresh() {
-      this.$refs.myScroll.refresh();
-      this.$refs.myScroll.finishPullUp();
+
+    //轮播图加载的响应 获得navCon的offsetTop
+    swiperImgLoad() {
+      /* console.log(this.$refs.navCon1.$el.offsetTop); */
+      const y = this.$refs.navCon1.$el.offsetTop - 44;
+      this.navConY = y;
+      this.NCScrollY.set("pop", -y);
+      this.NCScrollY.set("sell", -y);
+      this.NCScrollY.set("new", -y);
     },
   },
 };
@@ -124,5 +183,15 @@ export default {
 <style scoped>
 #home {
   height: 100vh;
+}
+.nCFixed {
+  position: fixed;
+  top: 43px;
+  left: 0;
+  right: 0;
+  z-index: 9;
+}
+.wrapper {
+  height: calc(100% - 93px);
 }
 </style>

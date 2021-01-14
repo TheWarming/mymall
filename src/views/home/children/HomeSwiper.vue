@@ -3,7 +3,7 @@
     <swiper v-if="bannerList.length">
       <swiper-item v-for="item in bannerList" :key="item.link">
         <a :href="item.link">
-          <img :src="item.image" :alt="item.link" />
+          <img :src="item.image" :alt="item.link" @load="swiperImgLoad" />
         </a>
       </swiper-item>
     </swiper>
@@ -24,6 +24,19 @@ export default {
       defalut() {
         return [];
       },
+    },
+  },
+  data() {
+    return {
+      isLoaded: false,
+    };
+  },
+  methods: {
+    swiperImgLoad() {
+      if (!this.isLoaded) {
+        this.$emit("swiperImgLoad");
+        this.isLoaded = true;
+      }
     },
   },
 };

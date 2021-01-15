@@ -1,13 +1,12 @@
 <template>
-  <div class="homeNav">
-    <navbar>
-      <p slot="center" class="title">首页</p>
-    </navbar>
-  </div>
+  <navbar class="homeNav">
+    <p slot="center" class="title">首页</p>
+  </navbar>
 </template>
 
 <script>
 import navbar from "components/common/navbar/navbar.vue";
+
 export default {
   name: "HomeNav",
   components: {
@@ -19,6 +18,7 @@ export default {
 <style scoped>
 .homeNav {
   height: 44px;
+  background-color: var(--color-tint);
 }
 .title {
   color: aliceblue;

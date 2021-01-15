@@ -87,11 +87,6 @@ export default {
       toTopIsShow: false,
       isShowNavCon1: false,
       NCList: ["流行", "热销", "新款"],
-      NCScrollY: new Map([
-        ["pop", 0],
-        ["sell", 0],
-        ["new", 0],
-      ]),
       scrollY: 0,
       navConY: 0,
       goodsList: {
@@ -130,13 +125,6 @@ export default {
     },
     /**事件响应 */
     changNavCon(index) {
-      const y = this.$refs.myScroll.getScrollY();
-      let time = 0;
-      if (y < -this.navConY) {
-        this.NCScrollY.set(this.currentType, y);
-      } else {
-        time = 200;
-      }
       switch (index) {
         case 0:
           this.currentType = "pop";
@@ -148,12 +136,18 @@ export default {
           this.currentType = "new";
           break;
       }
-      this.$refs.myScroll.toTop(0, this.NCScrollY.get(this.currentType), time);
-      this.$refs.myScroll.refresh();
 
       //同步nc1与nc2的显示
       this.$refs.navCon1.currentIndex = index;
       this.$refs.navCon2.currentIndex = index;
+
+      this.$refs.myScroll.refresh();
+
+      let time = 200;
+      if (this.$refs.myScroll.getScrollY() < -this.navConY) {
+        time = 0;
+      }
+      this.$refs.myScroll.toTop(0, -this.navConY, time);
     },
     toTop() {
       this.$refs.myScroll.toTop();
@@ -170,11 +164,7 @@ export default {
     //轮播图加载的响应 获得navCon的offsetTop
     swiperImgLoad() {
       /* console.log(this.$refs.navCon1.$el.offsetTop); */
-      const y = this.$refs.navCon1.$el.offsetTop - 44;
-      this.navConY = y;
-      this.NCScrollY.set("pop", -y);
-      this.NCScrollY.set("sell", -y);
-      this.NCScrollY.set("new", -y);
+      this.navConY = this.$refs.navCon1.$el.offsetTop - 44;
     },
   },
 };

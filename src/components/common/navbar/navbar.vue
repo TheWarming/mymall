@@ -18,7 +18,7 @@ export default {
   height: 44px;
   line-height: 44px;
   text-align: center;
-  background-color: var(--color-tint);
+  /* background-color: var(--color-tint); */
   font-size: 18px;
   /*   position: fixed;
   top: 0;

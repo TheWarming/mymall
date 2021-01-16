@@ -59,6 +59,7 @@ export default {
     },
     refresh() {
       this.bScroll && this.bScroll.refresh();
+      /* console.log("111111"); */
     },
     finishPullUp() {
       this.bScroll && this.bScroll.finishPullUp();

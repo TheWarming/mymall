@@ -27,6 +27,9 @@
         </td>
       </tr>
     </table>
+    <div>
+      <img :src="params.image" alt="" v-if="params.image" class="paramsImage" />
+    </div>
   </div>
 </template>
 
@@ -66,5 +69,8 @@ export default {
 }
 .setValue {
   color: var(--color-tint);
+}
+.paramsImage {
+  width: 100%;
 }
 </style>

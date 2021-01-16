@@ -45,11 +45,12 @@ import NavControl from "components/content/navControl/NavControl";
 import MyScroll from "components/common/myScroll/MyScroll";
 import BackTop from "components/common/backTop/BackTop";
 
-//引入防抖
-import { debounce } from "common/utils";
+//引入混入
+import { imgLoadListenerMixin, backTopMixin } from "common/mixin";
 
 export default {
   name: "home",
+  mixins: [imgLoadListenerMixin, backTopMixin],
   created() {
     /**网络请求 */
     this.getHomeMultidataV();
@@ -57,14 +58,12 @@ export default {
     this.getHomeDataV("sell");
     this.getHomeDataV("new");
   },
-  mounted() {
-    //响应goods的图片加载
-    const refresh = debounce(this.$refs.myScroll.refresh);
-    this.$bus.$on("goodsImgLoad", refresh);
+  deactivated() {
+    this.$bus.$off("goodsImgLoad", this.imgLoadListener);
   },
   activated() {
-    this.$refs.myScroll.toTop(0, this.scrollY, 0);
     this.$refs.myScroll.refresh();
+    this.$refs.myScroll.toTop(0, this.scrollY, 0);
   },
   deactivated() {
     this.scrollY = this.$refs.myScroll.getScrollY();
@@ -77,14 +76,12 @@ export default {
     HomeGoods,
     NavControl,
     MyScroll,
-    BackTop,
   },
   data() {
     return {
       currentType: "pop",
       banner: [],
       recommend: [],
-      toTopIsShow: false,
       isShowNavCon1: false,
       NCList: ["流行", "热销", "新款"],
       scrollY: 0,
@@ -148,9 +145,6 @@ export default {
         time = 0;
       }
       this.$refs.myScroll.toTop(0, -this.navConY, time);
-    },
-    toTop() {
-      this.$refs.myScroll.toTop();
     },
     scroll(pos) {
       /* console.log(pos.y, this.navConY, this.isShowNavCon1); */

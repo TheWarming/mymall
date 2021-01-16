@@ -16,6 +16,14 @@
       <span>{{ firstRate.created | showDate }}</span>
       <span>{{ firstRate.style }}</span>
     </p>
+    <div class="rateImages">
+      <img
+        :src="item"
+        alt=""
+        v-for="(item, index) in firstRate.images"
+        :key="index"
+      />
+    </div>
   </div>
 </template>
 
@@ -46,6 +54,10 @@ export default {
   padding: 10px 20px;
   border-bottom: #bbb 2px solid;
 }
+.more {
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
 .more span {
   float: right;
 }
@@ -69,5 +81,14 @@ export default {
 }
 .contentDetail span {
   padding: 5px;
+}
+.rateImages {
+  width: 100%;
+  margin-top: 10px;
+}
+.rateImages img {
+  width: 60px;
+  height: 60px;
+  margin-right: 5px;
 }
 </style>

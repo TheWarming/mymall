@@ -31,15 +31,16 @@ export default {
   },
   data() {
     return {
-      imgCount: 0,
+      /* imgCount: 0, */
     };
   },
   methods: {
     detailImageLoad() {
-      this.imgCount++;
+      /*       this.imgCount++;
       if (this.imgCount === this.detailInfo.detailImage[0].list.length) {
         this.$emit("detailImageLoad");
-      }
+      } */
+      this.$emit("detailImageLoad");
     },
   },
 };

@@ -9,6 +9,12 @@ export function getDetail(iid){
   })
 }
 
+export function getRecommend(){
+  return axios({
+    url:'/recommend'
+  })
+}
+
 export class BaseInfo{
   constructor(itemInfo,columns,services){
     this.title = itemInfo.title;
@@ -24,6 +30,7 @@ export class BaseInfo{
 export class Params{
   constructor(info,rule){
     this.set = info.set;
+    this.image = info.image ? info.image[0]:'';
     this.tables = rule.tables[0];
     for(let i = 1; i < rule.tables.length;i++){
       for(let j =0; j < rule.tables[i].length;j++){

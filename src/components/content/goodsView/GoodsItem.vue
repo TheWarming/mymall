@@ -1,6 +1,6 @@
 <template>
   <div class="goodsItem" @click="goodsClick()">
-    <img :src="good.show.img" alt="" @load="goodsImgLoad" />
+    <img :src="showImage" alt="" @load="goodsImgLoad" />
     <div>
       <p class="title">{{ good.title }}</p>
       <p>
@@ -25,12 +25,18 @@ export default {
       this.$bus.$emit("goodsImgLoad");
     },
     goodsClick() {
+      if (!this.good.iid) return;
       this.$router.push({
         path: "detail",
         query: {
           iid: this.good.iid,
         },
       });
+    },
+  },
+  computed: {
+    showImage() {
+      return this.good.image ? this.good.image : this.good.show.img;
     },
   },
 };

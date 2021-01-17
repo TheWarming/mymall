@@ -158,7 +158,13 @@ export default {
     //轮播图加载的响应 获得navCon的offsetTop
     swiperImgLoad() {
       /* console.log(this.$refs.navCon1.$el.offsetTop); */
-      this.navConY = this.$refs.navCon1.$el.offsetTop - 44;
+
+      /**第一次加载的时候轮播图最慢，所以用轮播图 */
+      /**但在多次切换的时候，很可能轮播图并不是最慢的，会导致高度出错 */
+      /**所以只让它在第一次加载的时候赋值一次 */
+      if (this.navConY === 0) {
+        this.navConY = this.$refs.navCon1.$el.offsetTop - 44;
+      }
     },
   },
 };

@@ -51,7 +51,6 @@ export default {
 .detailParams {
   padding: 20px 5px;
   border-bottom: #ddd 5px solid;
-  border-top: #ddd 5px solid;
 }
 .myTable {
   text-align: center;

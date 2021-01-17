@@ -1,29 +1,32 @@
 <template>
-  <div v-if="Object.keys(firstRate).length" class="detailRate">
-    <div class="more">
-      用户评价
-      <span>
-        更多
-        <img src="~assets/img/common/back.svg" alt="more" />
-      </span>
+  <div>
+    <div v-if="Object.keys(firstRate).length" class="detailRate">
+      <div class="more">
+        用户评价
+        <span>
+          更多
+          <img src="~assets/img/common/back.svg" alt="more" />
+        </span>
+      </div>
+      <div class="userInfo">
+        <img :src="firstRate.user.avatar" alt="avatar" />
+        <span>{{ firstRate.user.uname }}</span>
+      </div>
+      <p class="userContent">{{ firstRate.content }}</p>
+      <p class="contentDetail">
+        <span>{{ firstRate.created | showDate }}</span>
+        <span>{{ firstRate.style }}</span>
+      </p>
+      <div class="rateImages">
+        <img
+          :src="item"
+          alt=""
+          v-for="(item, index) in firstRate.images"
+          :key="index"
+        />
+      </div>
     </div>
-    <div class="userInfo">
-      <img :src="firstRate.user.avatar" alt="avatar" />
-      <span>{{ firstRate.user.uname }}</span>
-    </div>
-    <p class="userContent">{{ firstRate.content }}</p>
-    <p class="contentDetail">
-      <span>{{ firstRate.created | showDate }}</span>
-      <span>{{ firstRate.style }}</span>
-    </p>
-    <div class="rateImages">
-      <img
-        :src="item"
-        alt=""
-        v-for="(item, index) in firstRate.images"
-        :key="index"
-      />
-    </div>
+    <div v-else class="noRate">评论为空</div>
   </div>
 </template>
 
@@ -90,5 +93,12 @@ export default {
   width: 60px;
   height: 60px;
   margin-right: 5px;
+}
+.noRate {
+  height: 80px;
+  line-height: 80px;
+  font-size: 20px;
+  border-bottom: #bbb 2px solid;
+  text-align: center;
 }
 </style>

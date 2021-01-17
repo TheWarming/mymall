@@ -49,6 +49,7 @@ export default {
 <style scoped>
 .detailInfo {
   padding: 0 10px;
+  border-bottom: #ddd 5px solid;
 }
 .desc {
   padding: 30px 0;

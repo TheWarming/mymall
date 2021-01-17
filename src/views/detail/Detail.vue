@@ -13,6 +13,7 @@
       <detail-rate :firstRate="firstRate" ref="rate"></detail-rate>
       <detail-recommend :list="recommend" ref="recommend"></detail-recommend>
     </my-scroll>
+    <detail-bottom-nav @clickAddCart="clickAddCart"></detail-bottom-nav>
     <back-top @click.native="toTop" v-show="toTopIsShow"></back-top>
   </div>
 </template>
@@ -28,6 +29,7 @@ import DetailDetailInfo from "./children/DetailDetailInfo";
 import DetailParams from "./children/DetailParams";
 import DetailRate from "./children/DetailRate";
 import DetailRecommend from "./children/DetailRecommend";
+import DetailBottomNav from "./children/DetailBottomNav";
 
 import MyScroll from "components/common/myScroll/MyScroll";
 
@@ -45,7 +47,6 @@ export default {
   created() {
     getDetail(this.iid).then((res) => {
       const data = res.result;
-      /* console.log(data); */
       this.topImages = data.itemInfo.topImages;
       this.baseInfo = new BaseInfo(
         data.itemInfo,
@@ -66,7 +67,9 @@ export default {
 
     getRecommend().then((res) => {
       /* console.log(res); */
-      this.recommend = res.data.list;
+      if (res) {
+        this.recommend = res.data.list;
+      }
     });
   },
   components: {
@@ -78,6 +81,7 @@ export default {
     DetailParams,
     DetailRecommend,
     DetailRate,
+    DetailBottomNav,
     MyScroll,
   },
   data() {
@@ -128,6 +132,18 @@ export default {
       }
       this.$refs.nav.currentIndex = this.currentNavIndex;
     },
+
+    //添加到购物车
+    clickAddCart() {
+      const goods = {
+        image: this.topImages[0],
+        title: this.baseInfo.title,
+        iid: this.iid,
+        desc: this.baseInfo.desc,
+        price: this.baseInfo.realPrice,
+      };
+      this.$store.dispatch("addToCart", goods);
+    },
   },
 };
 </script>
@@ -140,7 +156,7 @@ export default {
   background-color: white;
 }
 .wrapper {
-  height: calc(100% - 44px);
+  height: calc(100% - 44px - 49px);
   position: relative;
 }
 </style>

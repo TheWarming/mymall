@@ -24,6 +24,8 @@ export class BaseInfo{
     this.discountBgColor = itemInfo.discountBgColor;
     this.columns = [columns[0],columns[1],services.shift().name];
     this.services = services;
+    this.desc = itemInfo.desc;
+    this.realPrice = itemInfo.lowNowPrice
   }
 }
 

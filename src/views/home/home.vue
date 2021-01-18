@@ -163,7 +163,8 @@ export default {
       /**但在多次切换的时候，很可能轮播图并不是最慢的，会导致高度出错 */
       /**所以只让它在第一次加载的时候赋值一次 */
       if (this.navConY === 0) {
-        this.navConY = this.$refs.navCon1.$el.offsetTop - 44;
+        /* this.navConY = this.$refs.navCon1.$el.offsetTop - 44; */
+        this.navConY = this.$refs.navCon1.$el.offsetTop;
       }
     },
   },
@@ -183,5 +184,6 @@ export default {
 }
 .wrapper {
   height: calc(100% - 93px);
+  position: relative;
 }
 </style>

@@ -6,16 +6,24 @@
         @click.native="clickCheck(goods)"
       ></check-button>
     </div>
-    <div class="image">
+    <div class="image" @click="goDetail(goods.iid)">
       <img :src="goods.image" alt="image" />
     </div>
     <div class="info">
-      <p class="title">{{ goods.title }}</p>
-      <p class="desc">商品描述：{{ goods.desc }}</p>
-      <p>
-        <span class="price">{{ "￥" + goods.price }}</span>
-        <span class="count">{{ "x" + goods.count }}</span>
+      <p class="title" @click="goDetail(goods.iid)">{{ goods.title }}</p>
+      <p class="desc" @click="goDetail(goods.iid)">
+        商品描述：{{ goods.desc }}
       </p>
+      <div>
+        <span class="price">{{ "￥" + goods.price }}</span>
+        <div class="count">
+          <button class="carrButton" @click="sub" :disabled="goods.count === 1">
+            -
+          </button>
+          <span class="countNum">{{ goods.count }}</span>
+          <button class="carrButton" @click="add">+</button>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -39,6 +47,21 @@ export default {
   methods: {
     clickCheck(goods) {
       this.$store.commit("cartCheckChange", goods);
+    },
+    goDetail(iid) {
+      //增加购物车跳转详情页
+      this.$router.push({
+        path: "detail",
+        query: {
+          iid,
+        },
+      });
+    },
+    add() {
+      this.$store.commit("cartCounter", this.goods);
+    },
+    sub() {
+      this.$store.commit("cartCounterSub", this.goods);
     },
   },
 };
@@ -87,5 +110,15 @@ export default {
 }
 .info .count {
   float: right;
+}
+.carrButton {
+  width: 20px;
+  height: 20px;
+  margin: 0 5px;
+}
+.countNum {
+  display: inline-block;
+  width: 30px;
+  text-align: center;
 }
 </style>

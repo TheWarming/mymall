@@ -57,9 +57,6 @@ export default {
   text-align: center;
   line-height: 49px;
 }
-.checkButton {
-  width: 20px;
-}
 .check {
   width: 100px;
 }

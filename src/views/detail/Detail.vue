@@ -142,7 +142,9 @@ export default {
         desc: this.baseInfo.desc,
         price: this.baseInfo.realPrice,
       };
-      this.$store.dispatch("addToCart", goods);
+      this.$store.dispatch("addToCart", goods).then((res) => {
+        this.$myToast.showToast(res);
+      });
     },
   },
 };

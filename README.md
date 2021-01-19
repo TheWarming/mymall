@@ -4,15 +4,15 @@
 
 ### 首页
 
-![Image](https://raw.githubusercontent.com/TheWarming/mymall/src/example/home.png)
+![Image](https://github.com/TheWarming/mymall/blob/main/src/assets/example/home.png)
 
 ### 详情页
 
-![Image](https://raw.githubusercontent.com/TheWarming/mymall/src/example/detail.png)
+![Image](https://github.com/TheWarming/mymall/blob/main/src/assets/example/detail.png)
 
 ### 购物车页面
 
-![Image](https://raw.githubusercontent.com/TheWarming/mymall/src/example/cart.png)
+![Image](https://github.com/TheWarming/mymall/blob/main/src/assets/example/cart.png)
 
 ## Project setup
 ```

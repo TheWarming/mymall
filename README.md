@@ -1,5 +1,17 @@
 # mymall
 
+## 首页
+
+![Image](https://raw.githubusercontent.com/TheWarming/mymall/READMEImg/home.png)
+
+## 详情页
+
+![Image](https://raw.githubusercontent.com/TheWarming/mymall/READMEImg/detail.png)
+
+## 购物车页面
+
+![Image](https://raw.githubusercontent.com/TheWarming/mymall/READMEImg/cart.png)
+
 ## Project setup
 ```
 npm install

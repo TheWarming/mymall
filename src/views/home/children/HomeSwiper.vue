@@ -3,7 +3,12 @@
     <swiper v-if="bannerList.length">
       <swiper-item v-for="item in bannerList" :key="item.link">
         <a :href="item.link">
-          <img :src="item.image" :alt="item.link" @load="swiperImgLoad" />
+          <img
+            :src="item.image"
+            :alt="item.link"
+            @load="swiperImgLoad"
+            class="swiperImg"
+          />
         </a>
       </swiper-item>
     </swiper>
@@ -43,4 +48,7 @@ export default {
 </script>
 
 <style scoped>
+.swiperImg {
+  width: 100%;
+}
 </style>

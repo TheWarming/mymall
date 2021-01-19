@@ -1,16 +1,18 @@
 # mymall
 
-## 首页
+## 图片示例
 
-![Image](https://raw.githubusercontent.com/TheWarming/mymall/READMEImg/home.png)
+### 首页
 
-## 详情页
+![Image](https://raw.githubusercontent.com/TheWarming/mymall/src/example/home.png)
 
-![Image](https://raw.githubusercontent.com/TheWarming/mymall/READMEImg/detail.png)
+### 详情页
 
-## 购物车页面
+![Image](https://raw.githubusercontent.com/TheWarming/mymall/src/example/detail.png)
 
-![Image](https://raw.githubusercontent.com/TheWarming/mymall/READMEImg/cart.png)
+### 购物车页面
+
+![Image](https://raw.githubusercontent.com/TheWarming/mymall/src/example/cart.png)
 
 ## Project setup
 ```
@@ -26,6 +28,3 @@ npm run serve
 ```
 npm run build
 ```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).

@@ -63,12 +63,17 @@ export default {
 
       //使用防抖
       this.debounceGetNavTopY = debounce(this.getNavTopY);
+
+      //防止购物车添加时没有数据
+      this.flag++;
     });
 
     getRecommend().then((res) => {
       /* console.log(res); */
       if (res) {
         this.recommend = res.data.list;
+        //防止购物车添加时没有数据
+        this.flag++;
       }
     });
   },
@@ -97,6 +102,7 @@ export default {
       navTopYs: [],
       currentNavIndex: 0,
       debounceGetNavTopY: null,
+      flag: 0,
     };
   },
   methods: {
@@ -135,6 +141,7 @@ export default {
 
     //添加到购物车
     clickAddCart() {
+      if (this.flag !== 2) return;
       const goods = {
         image: this.topImages[0],
         title: this.baseInfo.title,

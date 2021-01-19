@@ -7,8 +7,8 @@
 ![Image](https://github.com/TheWarming/mymall/blob/main/src/assets/example/Home2.png)
 
 ### 详情页
-![Image](https://github.com/TheWarming/mymall/blob/main/src/assets/example/Detail.png)
-![Image](https://github.com/TheWarming/mymall/blob/main/src/assets/example/Detai2.png)
+![Image](https://github.com/TheWarming/mymall/blob/main/src/assets/example/Detail1.png)
+![Image](https://github.com/TheWarming/mymall/blob/main/src/assets/example/Detail2.png)
 
 ### 购物车页面
 ![Image](https://github.com/TheWarming/mymall/blob/main/src/assets/example/Cart1.png)

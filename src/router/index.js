@@ -15,6 +15,10 @@ const routes = [
     redirect:'/home'
   },
   {
+    path:'/mymall',
+    redirect:'/home'
+  },
+  {
     path:'/home',
     component:Home
   },

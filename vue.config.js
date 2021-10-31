@@ -9,5 +9,7 @@ module.exports = {
         'common': '@/common',
       }
     }
-  }
+  },
+  publicPath: '/mymall/',
+  outputDir:'docs'
 }

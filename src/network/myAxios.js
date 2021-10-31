@@ -4,7 +4,7 @@ export default function axios(option){
   //创建实例与基本配置
   const instance = Axios.create({
     baseURL:'http://152.136.185.210:8000/api/w6/',
-    timeout:5000
+    timeout:3000
   });
   //请求和响应拦截
 /*   instance.interceptors.request.use(config => {

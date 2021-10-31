@@ -10,6 +10,5 @@ module.exports = {
       }
     }
   },
-  publicPath: '/mymall/',
   outputDir:'docs'
 }
